@@ -1,7 +1,7 @@
 import config
 import logging
 import aiogram
-
+import RisusService
 
 
 logging.basicConfig(level=logging.INFO);
@@ -10,12 +10,19 @@ bot = aiogram.Bot(config.TOKEN);
 
 eventHandler = aiogram.Dispatcher(bot);
 
-@eventHandler.message_handler(content_types=['sticker','text'])
-async def ds( message ):
-    id = message.chat.id;
+@eventHandler.message_handler(content_types=['text'])
+async def message_handler_text( message ):
 
 
-    await bot.send_sticker(chat_id=id, sticker='CAACAgIAAxkBAAN6Yc8PDm4Vq6MQasoMsTesgaFoWMsAAncBAAIsYPUcWWKFR1r1NF0jBA',reply_to_message_id=message.message_id);
+    risus = RisusService.Risus(message,bot);
 
+    await risus.responseToText();
+@eventHandler.message_handler(content_types=['sticker'])
+async def message_handler_sticker( message ):
+
+    risus = RisusService.Risus(message,bot)
+
+
+    await risus.responseToSticker(message.sticker.file_unique_id);
 if __name__ == "__main__":
     aiogram.executor.start_polling(eventHandler,skip_updates=True);
