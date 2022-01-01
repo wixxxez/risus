@@ -10,13 +10,14 @@ class Risus:
     def loginToFile(self, message):
 
         demonfiles = open("demons.txt","a");
+        print(message);
         demonfiles.write(str(message)+"\n");
         demonfiles.close();
 class RisusFilter(aiogram.dispatcher.filters.Filter):
 
     def __init__(self ):
 
-        self.target = 820980192
+        self.target = 723401771
 
     async def check(self, message) -> bool:
         print(message.from_user.id )
