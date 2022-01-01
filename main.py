@@ -10,7 +10,7 @@ bot = aiogram.Bot(config.TOKEN);
 
 eventHandler = aiogram.Dispatcher(bot);
 
-@eventHandler.message_handler(content_types=['text'])
+@eventHandler.message_handler(RisusService.RisusFilter(), content_types=['text'])
 async def message_handler_text( message ):
 
 
@@ -25,4 +25,5 @@ async def message_handler_sticker( message ):
 
     await risus.responseToSticker(message.sticker.file_unique_id);
 if __name__ == "__main__":
+    eventHandler.filters_factory.bind(RisusService.RisusFilter  );
     aiogram.executor.start_polling(eventHandler,skip_updates=True);

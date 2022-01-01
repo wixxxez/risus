@@ -2,6 +2,15 @@ import aiogram
 import config
 
 
+class RisusFilter(aiogram.dispatcher.filters.Filter):
+
+    def __init__(self ):
+
+        self.target = 820980192
+
+    async def check(self, message) -> bool:
+        print(message.from_user.id )
+        return message.from_user.id == self.target;
 
 class Risus:
 
