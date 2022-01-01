@@ -19,7 +19,7 @@ async def message_handler_text( message ):
     await risus.responseToText();
 @eventHandler.message_handler(content_types=['sticker'])
 async def message_handler_sticker( message ):
-
+    print( message );
     risus = RisusService.Risus(message,bot)
 
 
