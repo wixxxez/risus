@@ -2,6 +2,7 @@ import aiogram
 import config
 
 
+
 class Risus:
 
     def __init__(self, message,bot):
