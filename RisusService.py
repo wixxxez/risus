@@ -26,11 +26,14 @@ class RisusFilter(aiogram.dispatcher.filters.Filter):
         self.key_words = [
             "risus",
             "Різус",
-            "Ризус"
+            "Ризус",
+            "ris",
+            "риз",
+            "різ"
         ]
 
     async def check(self, message) -> bool:
-        print(message.chat.id )
+        print(message.from_user.id )
 
         status_r = False;
         for i in self.key_words:
@@ -50,8 +53,10 @@ class RisusResponse(WordsGeneratorService.WordsGenerator):
         self.bot = bot
 
     def responseToText(self):
-
-        text = self.GenerateText();
+        if self.message.from_user.id == 820980192:
+            text = self.GenerateText(config.complement_text);
+        else:
+         text = self.GenerateText(config.main_text);
 
         return self.bot.send_message(text=text,chat_id=self.id, reply_to_message_id = self.message.message_id);
 
