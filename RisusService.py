@@ -1,9 +1,21 @@
 import aiogram
 import config
 import WordsGeneratorService
+import codecs
+import re
+import RisusHelperService
+class RisusLogger:
+
+    def logMessage(self, text):
+        with codecs.open("demons.txt", "a", encoding="utf-8") as demonfiles:
+
+            text = RisusHelperService.StringAdapter().delete_emoji(text);
 
 
+            demonfiles.write(text + u"\n");
 
+
+logger = RisusLogger();
 
 class RisusFilter(aiogram.dispatcher.filters.Filter):
 
@@ -19,12 +31,14 @@ class RisusFilter(aiogram.dispatcher.filters.Filter):
 
     async def check(self, message) -> bool:
         print(message.chat.id )
+
         status_r = False;
         for i in self.key_words:
 
             if i.upper() in message.text.upper():
                 status_r = True;
-
+        if (status_r==False):
+            logger.logMessage(message.text);
         return  status_r ;
 
 class RisusResponse(WordsGeneratorService.WordsGenerator):
