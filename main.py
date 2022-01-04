@@ -15,13 +15,13 @@ async def message_handler_text( message ):
 
 
     risus = RisusService.RisusResponse(message,bot);
-    RisusService.Risus(False,message);
+
     await risus.responseToText();
 @eventHandler.message_handler(RisusService.RisusFilter(), content_types=['sticker','reply_to_message'])
 async def message_handler_sticker( message ):
     print( message );
     risus = RisusService.RisusResponse(message,bot)
-    RisusService.Risus(False, message);
+
 
     await risus.responseToSticker(message.sticker.file_unique_id);
 if __name__ == "__main__":
