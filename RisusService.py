@@ -37,7 +37,7 @@ class RisusFilter(aiogram.dispatcher.filters.Filter):
 
             if i.upper() in message.text.upper():
                 status_r = True;
-        if (status_r==False):
+        if (status_r==False and message.chat.id == -1001622487064):
             logger.logMessage(message.text);
         return  status_r ;
 
@@ -52,6 +52,7 @@ class RisusResponse(WordsGeneratorService.WordsGenerator):
     def responseToText(self):
 
         text = self.GenerateText();
+
         return self.bot.send_message(text=text,chat_id=self.id, reply_to_message_id = self.message.message_id);
 
     def responseToSticker(self, sticker):
