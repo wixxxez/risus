@@ -44,6 +44,7 @@ class RisusFilter(aiogram.dispatcher.filters.Filter):
             logger.logMessage(message.text);
         return  status_r ;
 
+
 class RisusResponse(WordsGeneratorService.WordsGenerator):
 
     def __init__(self, message,bot):
@@ -52,14 +53,22 @@ class RisusResponse(WordsGeneratorService.WordsGenerator):
         self.message = message
         self.bot = bot
 
-    def responseToText(self):
+    def getResponseByFilter(self):
         if self.message.from_user.id == 820980192:
-            text = self.GenerateText(config.complement_text);
+            return  self.GenerateText(config.complement_text);
+        if self.message.from_user.id == 1341005388:
+            return self.bot.send_sticker(chat_id=self.id, sticker=config.go_fuckyourself_piano_cat,
+                                         reply_to_message_id=self.message.message_id);
         else:
-         text = self.GenerateText(config.main_text);
+            return self.GenerateText(config.main_text_ukr);
 
-        return self.bot.send_message(text=text,chat_id=self.id, reply_to_message_id = self.message.message_id);
+    def responseToText(self):
 
+        text = self.getResponseByFilter();
+        if type(text) is str:
+            return self.bot.send_message(text=text,chat_id=self.id, reply_to_message_id = self.message.message_id);
+        else:
+            return text;
     def responseToSticker(self, sticker):
         if(sticker == "AgADhwEAAixg9Rw"):
             return self.bot.send_sticker(chat_id=self.id, sticker=config.suck_dick_cat,

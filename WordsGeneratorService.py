@@ -13,7 +13,7 @@ class WordsGenerator:
 
     def GenerateText(self, textConfig):
         self.ReadFile(textConfig);
-        words_length = random.randrange(150, 225, 1);
+        words_length = random.randrange(50,225, 1);
 
         return self.words_template.make_short_sentence(words_length);
 
